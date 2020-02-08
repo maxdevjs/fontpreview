@@ -117,11 +117,13 @@ main(){
             # Display the font preview using sxiv
             #sxiv -g "$SIZE$POSITION" "$FONT_PREVIEW" -N "fontpreview" -b &
             sxiv -N "fontpreview" -b -g "$SIZE$POSITION" "$FONT_PREVIEW" &
-
+sleep 0.5
             # Change focus from sxiv, back to the terminal window
             # so that user can continue to search for fonts without
             # having to manually change focus back to the terminal window
-            xdotool windowfocus "$(cat "$TERMWIN_IDFILE")"
+            #xdotool windowfocus "$(cat "$TERMWIN_IDFILE")"
+            notify-send -t 5000 "$TERMWIN_IDFILE" "$(cat "$TERMWIN_IDFILE")"
+            xdotool windowactivate "$(cat "$TERMWIN_IDFILE")"
 
             # Save the process ID so that we can kill
             # sxiv when the user exits the script
